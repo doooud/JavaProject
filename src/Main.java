@@ -13,8 +13,8 @@ public class Main {
         StdDraw.setYscale(0, 17);
         StdDraw.enableDoubleBuffering();
 
-        Player p1 = new Player("p1", "RED");
-        Player p2 = new Player("Adrien", "BLUE");
+        Player p1 = new Player("p1", "RED", 0, 0);
+        Player p2 = new Player("Adrien", "BLUE", 0, 0);
 
 
 
@@ -35,8 +35,8 @@ public class Main {
 
         Scanner myScan = new Scanner(System.in);
 
-        Player p1 = new Player("p1", "RED");
-        Player p2 = new Player("Adrien", "BLUE");
+        Player p1 = new Player("p1", "RED", 0, 0);
+        Player p2 = new Player("Adrien", "BLUE", 0,0);
 
 
         p1.drawPlayer(p1.color);

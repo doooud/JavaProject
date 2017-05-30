@@ -1,41 +1,48 @@
-import java.util.Timer;
-import java.util.TimerTask;
-
 /**
  * Created by user on 18/05/2017.
  */
+
+
 public class Bomb {
 
-
+/*
     public String color;
     public float posx;
     public float posy;
 
-    public Bomb(String c) {
+    public Bomb(String c,float x, float y) { // c pour la couleur permettant d'identifier la personne posant la bombe
 
         this.color = c;
 
         if (color == "RED") {
-            this.posx = 1.5f;
-            this.posy = 1.5f;
+            this.posx = x;
+            this.posy = y;
         } else {
-            this.posx = 19.5f;
-            this.posy = 15.5f;
+            this.posx = x;
+            this.posy = y;
         }
     }
+
+    public void drawBomb(){
+
+        StdDraw.filledCircle(this.posx, this.posy, 0.35);
+
+    }
+
 
     public static void bombTime(){
-            Timer timer = new Timer();
+        Timer timer = new Timer();
 
-            timer.schedule(new TimerTask() {
-                public void run() {
-                    System.out.print("Hey");
+        timer.schedule(new TimerTask() {
+            public void run() {
+                System.out.print("Hey");
 
-                }
-            }, 3*1000); // millisecondes
+            }
+        }, 3*1000); // millisecondes
 
 
-        }
     }
-
+  */
 }
+
+

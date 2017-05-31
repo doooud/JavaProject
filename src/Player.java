@@ -71,12 +71,18 @@ public class Player {
     public void drawPlayer(String c) {
 
         if (c == "RED") {
-            StdDraw.setPenColor(StdDraw.RED);
+            /*StdDraw.setPenColor(StdDraw.RED);*/
+
+            double posx = 1;
+            double posy = 1;
+            double xi = 1;
+            double yi = 1;
+            StdDraw.picture(this.posx,this.posy,"images/Metroid_Samus_Boule.png", xi, yi );
         } else if (c == "BLUE") {
             StdDraw.setPenColor(StdDraw.BLUE);
         }
 
-        StdDraw.filledCircle(this.posx, this.posy, 0.45);
+        /*StdDraw.filledCircle(this.posx, this.posy, 0.45);*/
     }
 
     public void replacePlayer(){

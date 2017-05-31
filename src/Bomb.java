@@ -1,3 +1,7 @@
+import edu.princeton.cs.introcs.StdDraw;
+
+import java.awt.event.KeyEvent;
+
 /**
  * Created by user on 18/05/2017.
  */
@@ -5,7 +9,7 @@
 
 public class Bomb {
 
-/*
+
     public String color;
     public float posx;
     public float posy;
@@ -21,11 +25,13 @@ public class Bomb {
             this.posx = x;
             this.posy = y;
         }
+
     }
-
-    public void drawBomb(){
-
-        StdDraw.filledCircle(this.posx, this.posy, 0.35);
+/*
+    public void putBomb(){
+        if(StdDraw.isKeyPressed(KeyEvent.VK_SHIFT)){
+            StdDraw.filledCircle(this.posx, this.posy, 0.35);
+        }
 
     }
 
@@ -42,7 +48,7 @@ public class Bomb {
 
 
     }
-  */
+*/
 }
 
 

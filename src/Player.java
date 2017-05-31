@@ -1,5 +1,6 @@
 import edu.princeton.cs.introcs.StdDraw;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
@@ -78,6 +79,11 @@ public class Player {
         StdDraw.filledCircle(this.posx, this.posy, 0.45);
     }
 
+    public void replacePlayer(){
+        StdDraw.setPenColor(StdDraw.GREEN);
+        StdDraw.filledSquare(getPosx(), getPosy(), 0.5);
+    }
+
     public void movePlayer(String c) {
 
         drawPlayer(c);
@@ -87,112 +93,70 @@ public class Player {
         if (c == "RED") {
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosy(getPosy() + 1);
-                g1.generate(0, 0);
-
                 drawPlayer(c);
 
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosy(getPosy() - 1);
-                g1.generate(0, 0);
-
                 drawPlayer(c);
+
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosx(getPosx() + 1);
-                g1.generate(0, 0);
                 drawPlayer(c);
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) getPosx() - 1][(int) (getPosy())] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosx(getPosx() - 1);
-                g1.generate(0, 0);
                 drawPlayer(c);
             }
         } else if (c == "BLUE") {
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_Z) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-
-                StdDraw.clear();
+                replacePlayer();
                 setPosy(getPosy() + 1);
-                g1.generate(0, 0);
-
                 drawPlayer(c);
 
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosy(getPosy() - 1);
-                g1.generate(0, 0);
+                drawPlayer(c);
 
-                drawPlayer(c);
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosx(getPosx() + 1);
-                g1.generate(0, 0);
                 drawPlayer(c);
+
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) getPosx() - 1][(int) (getPosy())] != 0) {
-                StdDraw.clear();
+                replacePlayer();
                 setPosx(getPosx() - 1);
-                g1.generate(0, 0);
                 drawPlayer(c);
+
             }
         }
 
     }
 
+    public void putBomb(){
+            StdDraw.setPenColor(StdDraw.BLACK);
+            StdDraw.filledCircle(getPosx(), getPosy(), 0.20);
+    }
+
     public void bombPlayer(String c) {
 
-        drawPlayer(c);
-        GUI g1 = new GUI();
         // rajouter condition si orange alors blogué aussi
 
-        if (c == "RED") {
-
-            if (StdDraw.isKeyPressed(KeyEvent.VK_TAB) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) { //rajouter condition stack de bombe
-                StdDraw.clear();
-                setPosy(getPosy() + 1);
-
-
-                g1.generate(0, 0);
-                drawPlayer(c);
-
-            } else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                StdDraw.clear();
-                setPosy(getPosy() - 1);
-                g1.generate(0, 0);
-
-                drawPlayer(c);
-
-            } else if (c == "BLUE") {
-
-                if (StdDraw.isKeyPressed(KeyEvent.VK_Z) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-
-                    StdDraw.clear();
-                    setPosy(getPosy() + 1);
-                    g1.generate(0, 0);
-
-                    drawPlayer(c);
-
-                } else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                    StdDraw.clear();
-                    setPosy(getPosy() - 1);
-                    g1.generate(0, 0);
-
-                    drawPlayer(c);
-                } else if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-                    StdDraw.clear();
-                    setPosx(getPosx() + 1);
-                    g1.generate(0, 0);
-                    drawPlayer(c);
-                } else if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) getPosx() - 1][(int) (getPosy())] != 0) {
-                    StdDraw.clear();
-                    setPosx(getPosx() - 1);
-                    g1.generate(0, 0);
-                    drawPlayer(c);
+            if (c == "RED") {
+                if (StdDraw.isKeyPressed(KeyEvent.VK_F)){ //rajouter condition stack de bombe
+                    putBomb();
+                }
+            }
+            else if (c == "BLUE") {
+                if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) ) {
+                    putBomb();
                 }
             }
 
-        }
     }
 }

@@ -10,13 +10,14 @@ public class Position {
     Player p1 = new Player("p1", "RED", 0,0);
     Player p2 = new Player("Adrien", "BLUE", 0, 0);
 
-
     public float posx;
     public float posy;
 
+
+
     public Position(){
 
-        if(p1.name ==  "p1"){
+        if(p1.color ==  "RED"){
             this.posx = 1.5f;
             this.posy = 1.5f;
         }
@@ -113,7 +114,5 @@ public class Position {
                 p2.drawPlayer(c);
             }
         }
-
     }
-
 }

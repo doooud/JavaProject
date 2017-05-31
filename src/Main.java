@@ -16,8 +16,6 @@ public class Main {
         Player p1 = new Player("p1", "RED", 0, 0);
         Player p2 = new Player("Adrien", "BLUE", 0, 0);
 
-
-
         Interface();
 
         while(true){
@@ -25,7 +23,8 @@ public class Main {
             p1.drawPlayer(p1.color);
             p1.movePlayer(p1.color);
             p2.drawPlayer(p2.color);
-
+            p2.bombPlayer(p2.color);
+            p1.bombPlayer(p1.color);
             StdDraw.show(60);
 
         }

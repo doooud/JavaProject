@@ -10,5 +10,6 @@
     <orderEntry type="library" name="stdlib-package" level="project" />
     <orderEntry type="library" name="stdlib-package1" level="project" />
     <orderEntry type="library" name="stdlib-package2" level="project" />
+    <orderEntry type="library" name="stdlib-package3" level="project" />
   </component>
 </module>

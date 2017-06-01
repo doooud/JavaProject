@@ -1,6 +1,8 @@
 import edu.princeton.cs.introcs.StdDraw;
 
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
+
 
 
 public class Main {
@@ -17,15 +19,23 @@ public class Main {
 
         GUI g1 = new GUI();
         int value;
+        int i,j;
 
         while(true){
 
             g1.generate();
+            //debug
+            if(StdDraw.isKeyPressed(KeyEvent.VK_D)){
+                for(i = 0; i <= g1.board.length - 1; i++) {
+                    for (j = 0; j <= g1.board[1].length - 1; j++) {
+                        System.out.print(g1.board[i][j]);
+                    }
+                    System.out.println("");
+                }
+            }
 
-
-
-            p2.movePlayer(p2.color);
-            p1.movePlayer(p1.color);
+            p2.movePlayer(p2.color, g1);
+            p1.movePlayer(p1.color, g1);
 
             p1.bombPlayer(p1.color, g1);
 

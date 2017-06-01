@@ -80,6 +80,8 @@ public class GUI {
                         StdDraw.filledCircle(i+0.5, j+0.5, 0.20);
 
                     }
+
+
                 }
 
                 //System.out.print(board[i][j]);

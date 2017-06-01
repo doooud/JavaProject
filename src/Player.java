@@ -1,7 +1,8 @@
 import edu.princeton.cs.introcs.StdDraw;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by user on 18/05/2017.
@@ -16,6 +17,8 @@ public class Player {
     public float posx;
     public float posy;
 
+    private int pressCount = 0;
+    private int imageValue = 1;
 
     public Player(String n, String c, float x, float y) {
 
@@ -71,28 +74,44 @@ public class Player {
     public void drawPlayer(String c) {
 
         if (c == "RED") {
-            /*StdDraw.setPenColor(StdDraw.RED);*/
+            //StdDraw.setPenColor(StdDraw.RED);
 
-            double posx = 1;
-            double posy = 1;
-            double xi = 1;
-            double yi = 1;
-            StdDraw.picture(this.posx,this.posy,"images/Metroid_Samus_Boule.png", xi, yi );
-        } else if (c == "BLUE") {
-            StdDraw.setPenColor(StdDraw.BLUE);
+            imageValue ++;
+
+            if(imageValue<=30){
+                StdDraw.picture(this.posx, this.posy, "image/running-metroid/m"+imageValue+".png", 1.2,1.2);
+                //System.out.print(imageValue);
+
+            }
+            else{
+                imageValue = 1;
+            }
+        }
+        else if (c == "BLUE") {
+
+            imageValue ++;
+
+            if(imageValue<=12){
+                StdDraw.picture(this.posx, this.posy, "image/vilain-metroid/v"+imageValue+".png", 1,1);
+                //System.out.print(imageValue);
+
+            }
+            else{
+                imageValue = 1;
+            }
         }
 
-        /*StdDraw.filledCircle(this.posx, this.posy, 0.45);*/
+        //StdDraw.filledCircle(this.posx, this.posy, 0.45);
     }
 
-    public void replacePlayer(){
-        StdDraw.setPenColor(StdDraw.GREEN);
-        StdDraw.filledSquare(getPosx(), getPosy(), 0.5);
+
+    public void replacePlayer() {
+        //StdDraw.setPenColor(StdDraw.GREEN);
+        //StdDraw.filledSquare(getPosx(), getPosy(), 0.5);
     }
 
     public void movePlayer(String c) {
 
-        drawPlayer(c);
         GUI g1 = new GUI();
         // rajouter condition si 1 alors blogué aussi
 
@@ -142,27 +161,68 @@ public class Player {
             }
         }
 
+
     }
 
-    public void putBomb(){
-            StdDraw.setPenColor(StdDraw.BLACK);
-            StdDraw.filledCircle(getPosx(), getPosy(), 0.20);
+    public void putBomb() {
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.filledCircle(getPosx(), getPosy(), 0.20);
     }
 
-    public void bombPlayer(String c) {
-
+    public void bombPlayer(String c, GUI g1) {
         // rajouter condition si orange alors blogué aussi
 
-            if (c == "RED") {
-                if (StdDraw.isKeyPressed(KeyEvent.VK_F)){ //rajouter condition stack de bombe
-                    putBomb();
-                }
-            }
-            else if (c == "BLUE") {
-                if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE) ) {
-                    putBomb();
-                }
-            }
+        int bombVal = 3;
+        int value; // où est le joueur
+        value = g1.board[(int) getPosx()][(int) (getPosy())]; //le joueur est sur une case verte donc 1
 
+
+        if (c == "RED") {
+
+            if (StdDraw.isKeyPressed(KeyEvent.VK_F)) { //rajouter condition stack de bombe
+
+                pressCount = pressCount +1 ; // incrémentation du nombre de fois où le joueur à mis une bombe
+
+                int [][] g2 = g1.board; //tableau de transition
+
+                System.out.println(getPosx() +" // position y" +  getPosy() + "//") ;
+                System.out.println((int) getPosx() +"// position y" +  (int) getPosy()+ "/INT/") ;
+                //System.out.println( g2[(int) (getPosy())][(int) (getPosx())]);
+
+                g2[(int) (getPosx())][(int) (getPosy())] = 3;
+                g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
+                //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
+                //System.out.print(pressCount);
+                Timer timer = new Timer();
+
+                if(pressCount > 20){
+                    System.out.print("vous n'avez plus de bombes, veuillez attendre 3 secondes");
+
+                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
+
+                        public void run() {
+                            pressCount = pressCount - 1;
+                        }
+                    }, 5 * 1000); // millisecondes
+                }
+                else{
+                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
+
+                        public void run() {
+                            int g2[][] = g1.board;
+                            g2[(int) getPosx()][(int) getPosy()] = 2;
+                            g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
+                            //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
+                        }
+                    }, 5 * 1000); // millisecondes
+                }
+
+            }
+        } else if (c == "BLUE") {
+            if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
+                //putBomb();
+            }
+        }
     }
+
 }

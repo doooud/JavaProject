@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
  */
 
 
-public class Bomb {
+public class Bomb{
 
 
     public String color;

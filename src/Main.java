@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        StdDraw.clear();
 
         StdDraw.setCanvasSize(21 * 50, 17 * 50);
         StdDraw.setXscale(0, 21);
@@ -16,20 +15,29 @@ public class Main {
         Player p1 = new Player("p1", "RED", 0, 0);
         Player p2 = new Player("Adrien", "BLUE", 0, 0);
 
+        GUI g1 = new GUI();
+
+
 
         while(true){
 
-            Interface();
+            g1.generate();
+
+
 
             p2.movePlayer(p2.color);
-            p1.drawPlayer(p1.color);
             p1.movePlayer(p1.color);
+
+            p1.bombPlayer(p1.color, g1);
+
+            p2.bombPlayer(p2.color, g1);
+
+            g1.checkBomb();
             p2.drawPlayer(p2.color);
-            p2.bombPlayer(p2.color);
-            p1.bombPlayer(p1.color);
+            p1.drawPlayer(p1.color);
+
             StdDraw.show(60);
 
-            StdDraw.clear();
 
         }
     }
@@ -60,12 +68,7 @@ public class Main {
 
 
     }
-    public static void Interface(){
 
-        GUI g1 = new GUI();
-        g1.generate(0,0);
-
-    }
 
 
 

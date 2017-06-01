@@ -58,7 +58,7 @@ public class Position {
             if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0){
                 StdDraw.clear();
                 setPosy(getPosy() + 1);
-                g1.generate(0,0);
+                g1.generate();
 
                 p1.drawPlayer(c);
 
@@ -66,20 +66,20 @@ public class Position {
             else if(StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0){
                 StdDraw.clear();
                 setPosy(getPosy() - 1);
-                g1.generate(0,0);
+                g1.generate();
 
                 p1.drawPlayer(c);
             }
             else if(StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0){
                 StdDraw.clear();
                 setPosx(getPosx() + 1);
-                g1.generate(0,0);
+                g1.generate();
                 p1.drawPlayer(c);
             }
             else if(StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) getPosx()-1][(int) (getPosy())] != 0){
                 StdDraw.clear();
                 setPosx(getPosx() - 1);
-                g1.generate(0,0);
+                g1.generate();
                 p1.drawPlayer(c);
             }
         }
@@ -89,7 +89,7 @@ public class Position {
 
                 StdDraw.clear();
                 setPosy(getPosy() + 1);
-                g1.generate(0,0);
+                g1.generate();
 
                 p2.drawPlayer(c);
 
@@ -97,20 +97,20 @@ public class Position {
             else if(StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0){
                 StdDraw.clear();
                 setPosy(getPosy() - 1);
-                g1.generate(0,0);
+                g1.generate();
 
                 p2.drawPlayer(c);
             }
             else if(StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0){
                 StdDraw.clear();
                 setPosx(getPosx() + 1);
-                g1.generate(0,0);
+                g1.generate();
                 p2.drawPlayer(c);
             }
             else if(StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) getPosx()-1][(int) (getPosy())] != 0){
                 StdDraw.clear();
                 setPosx(getPosx() - 1);
-                g1.generate(0,0);
+                g1.generate();
                 p2.drawPlayer(c);
             }
         }

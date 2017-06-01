@@ -182,14 +182,21 @@ public class Player {
             if (StdDraw.isKeyPressed(KeyEvent.VK_F)) { //rajouter condition stack de bombe
 
                 pressCount = pressCount +1 ; // incrémentation du nombre de fois où le joueur à mis une bombe
+                int valPosx = (int) getPosx();
+                int valPosy = (int) getPosy();
+                value = g1.board[valPosx][valPosy];
 
                 int [][] g2 = g1.board; //tableau de transition
 
                 System.out.println(getPosx() +" // position y" +  getPosy() + "//") ;
                 System.out.println((int) getPosx() +"// position y" +  (int) getPosy()+ "/INT/") ;
                 //System.out.println( g2[(int) (getPosy())][(int) (getPosx())]);
-
-                g2[(int) (getPosx())][(int) (getPosy())] = 3;
+                if(value == 1){
+                    g2[(int) (getPosx())][(int) (getPosy())] = 3;
+                }
+                else if(value == 2){
+                    g2[(int) (getPosx())][(int) (getPosy())] = 4;
+                }
                 g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
                 //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
                 //System.out.print(pressCount);
@@ -210,9 +217,8 @@ public class Player {
 
                         public void run() {
                             int g2[][] = g1.board;
-                            g2[(int) getPosx()][(int) getPosy()] = 2;
-                            g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
-                            //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
+                            g2[valPosx][valPosy] = 2;
+                            g1.setBoard(g2);
                         }
                     }, 5 * 1000); // millisecondes
                 }

@@ -16,8 +16,7 @@ public class Main {
         Player p2 = new Player("Adrien", "BLUE", 0, 0);
 
         GUI g1 = new GUI();
-
-
+        int value;
 
         while(true){
 

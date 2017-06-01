@@ -65,14 +65,26 @@ public class GUI {
 
         for(i = 0; i <= this.board.length - 1; i++) {
             for (j = 0; j <= this.board[1].length - 1; j++) {
-                if (this.board[i][j] == 3) {
-                    StdDraw.setPenColor(StdDraw.BLACK);
-                    StdDraw.filledCircle(i+0.5, i+0.5, 0.20);
+                    if (this.board[i][j] == 3) {
+
+                        StdDraw.setPenColor(StdDraw.ORANGE);
+                        StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
+                        StdDraw.setPenColor(StdDraw.BLACK);
+                        StdDraw.filledCircle(i+0.5, j+0.5, 0.20);
+
+                    }
+                    else if(this.board[i][j] == 4){
+                        StdDraw.setPenColor(StdDraw.GREEN);
+                        StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
+                        StdDraw.setPenColor(StdDraw.BLACK);
+                        StdDraw.filledCircle(i+0.5, j+0.5, 0.20);
+
+                    }
                 }
 
                 //System.out.print(board[i][j]);
-            }
         }
+
     }
     public int[][] getBoard() {
         return board;

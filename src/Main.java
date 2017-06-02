@@ -14,8 +14,8 @@ public class Main {
         StdDraw.setYscale(0, 17);
         StdDraw.enableDoubleBuffering();
 
-        Player p1 = new Player("p1", "RED", 0, 0);
-        Player p2 = new Player("Adrien", "BLUE", 0, 0);
+        Player p1 = new Player("p1", "RED", 0, 0, 3);
+        Player p2 = new Player("Adrien", "BLUE", 0, 0, 3);
 
         GUI g1 = new GUI();
         int value;
@@ -26,6 +26,8 @@ public class Main {
             g1.generate();
             //debug
             if(StdDraw.isKeyPressed(KeyEvent.VK_D)){
+                System.out.print(p1.getVie());
+                System.out.println("----------");
                 for(i = 0; i <= g1.board.length - 1; i++) {
                     for (j = 0; j <= g1.board[1].length - 1; j++) {
                         System.out.print(g1.board[i][j]);
@@ -55,8 +57,8 @@ public class Main {
 
         Scanner myScan = new Scanner(System.in);
 
-        Player p1 = new Player("p1", "RED", 0, 0);
-        Player p2 = new Player("Adrien", "BLUE", 0,0);
+        Player p1 = new Player("p1", "RED", 0, 0, 3);
+        Player p2 = new Player("Adrien", "BLUE", 0,0, 3);
 
 
         p1.drawPlayer(p1.color);

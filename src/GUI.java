@@ -72,20 +72,18 @@ public class GUI {
 
                     if (this.board[i][j] == 3) {
 
-                        StdDraw.setPenColor(StdDraw.ORANGE);
+                        StdDraw.setPenColor(StdDraw.GREEN);
                         StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
                         StdDraw.setPenColor(StdDraw.BLACK);
                         StdDraw.filledCircle(i+0.5, j+0.5, 0.20);
 
                     }
                     else if(this.board[i][j] == 4){
-                        StdDraw.setPenColor(StdDraw.GREEN);
+                        StdDraw.setPenColor(StdDraw.ORANGE);
                         StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
-                        StdDraw.setPenColor(StdDraw.BLACK);
-                        StdDraw.filledCircle(i+0.5, j+0.5, 0.20);
 
                     }else if(this.board[i][j] == 5){
-                        StdDraw.setPenColor(StdDraw.ORANGE);
+                        StdDraw.setPenColor(StdDraw.GREEN);
                         StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
                     }
 

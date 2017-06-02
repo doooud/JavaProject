@@ -1,6 +1,7 @@
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -123,61 +124,93 @@ public class Player {
 
     public void movePlayer(String c, GUI g1) {
 
-        // rajouter condition si 1 alors blogué aussi
-
         if (c == "RED") {
+
             if (StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-                if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 3) {
-                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 4){
-                        replacePlayer();
-                        setPosy(getPosy() + 1);
-                        drawPlayer(c);
+                if (StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 3) {
+                        if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 4){
+                            replacePlayer();
+                            setPosy(getPosy() + 1);
+                            drawPlayer(c);
+                        }
                     }
                 }
-            } else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                replacePlayer();
-                setPosy(getPosy() - 1);
-                drawPlayer(c);
-
-            } else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-                replacePlayer();
-                setPosx(getPosx() + 1);
-                drawPlayer(c);
+            } else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) { // down
+                if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 3) {
+                        if(StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 4){
+                            replacePlayer();
+                            setPosy(getPosy() - 1);
+                            drawPlayer(c);
+                        }
+                    }
+                }
+            } else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 0) {
+                if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 3) {
+                        if(StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 4){
+                            replacePlayer();
+                            setPosx(getPosx() + 1);
+                            drawPlayer(c);
+                        }
+                    }
+                }
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) getPosx() - 1][(int) (getPosy())] != 0) {
-                replacePlayer();
-                setPosx(getPosx() - 1);
-                drawPlayer(c);
+                if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) (getPosx() - 1)][(int) (getPosy())] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) (getPosx() - 1)][(int) (getPosy())] != 3) {
+                        if(StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && g1.getBoard()[(int) (getPosx() - 1)][(int) (getPosy())] != 3){
+                            replacePlayer();
+                            setPosx(getPosx() - 1);
+                            drawPlayer(c);
+                        }
+
+
+                    }
+                }
             }
         } else if (c == "BLUE") {
 
             if (StdDraw.isKeyPressed(KeyEvent.VK_Z) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-                if(g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 3) {
-                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 4){
+                if (StdDraw.isKeyPressed(KeyEvent.VK_Z) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_Z) && g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 3) {
                         replacePlayer();
                         setPosy(getPosy() + 1);
                         drawPlayer(c);
+
                     }
                 }
-            } else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) {
-                replacePlayer();
-                setPosy(getPosy() - 1);
-                drawPlayer(c);
+            } else if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 0) { // down
+                if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_S) && g1.getBoard()[(int) getPosx()][(int) (getPosy() - 1)] != 3) {
+                        replacePlayer();
+                        setPosy(getPosy() - 1);
+                        drawPlayer(c);
 
-            } else if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-                replacePlayer();
-                setPosx(getPosx() + 1);
-                drawPlayer(c);
+                    }
+                }
+            } else if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 0) {
+                if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_D) && g1.getBoard()[(int) (getPosx() + 1)][(int) (getPosy())] != 3) {
+                        replacePlayer();
+                        setPosx(getPosx() + 1);
+                        drawPlayer(c);
 
+                    }
+                }
             } else if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) getPosx() - 1][(int) (getPosy())] != 0) {
-                replacePlayer();
-                setPosx(getPosx() - 1);
-                drawPlayer(c);
+                if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) (getPosx() - 1)][(int) (getPosy())] != 1) {
+                    if (StdDraw.isKeyPressed(KeyEvent.VK_Q) && g1.getBoard()[(int) (getPosx() - 1)][(int) (getPosy())] != 3) {
+                        replacePlayer();
+                        setPosx(getPosx() - 1);
+                        drawPlayer(c);
 
+                    }
+                }
             }
         }
-
-
     }
+
 
     public void putBomb() {
         StdDraw.setPenColor(StdDraw.BLACK);
@@ -213,53 +246,47 @@ public class Player {
                 System.out.println(getPosx() +" // position y" +  getPosy() + "//") ;
                 System.out.println((int) getPosx() +"// position y" +  (int) getPosy()+ "/INT/") ;
 
-                if( getValue((int) getPosx(), (int) getPosy(), g1.board) == 1) { // sert à rien ne peut que se déplacer sur les cases 2
-
+                if(value == 2){
+// rajouter le cas où pos == 1 et changer en orange
                     if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0) {
 
                         g2[(int) (getPosx())][(int) (getPosy())] = 3;
                     }
                     if (g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
-
-                        g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
+                        if(g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] == 1) {
+                            g2[(int) (getPosx() + 1)][(int) (getPosy())] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
+                        }
                     }
-
                     if (g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-
-                        g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
+                        if(g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] == 1){
+                            g2[(int) (getPosx())][(int) (getPosy() + 1)] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
+                        }
                     }
                     if (g1.getBoard()[(int) getPosx()-1][(int) getPosy()] !=0){
-                        g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
+                        if(g1.getBoard()[(int) getPosx()-1][(int) getPosy()] == 1){
+                            g2[(int) (getPosx() - 1)][(int) (getPosy())] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
+                        }
 
                     }
                     if (g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] != 0) {
-                        g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
+                        if(g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] == 1){
+                            g2[(int) (getPosx())][(int) (getPosy() - 1)] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
+                        }
 
                     }
 
-                }
-                else if(value == 2){
-
-                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0) {
-
-                        g2[(int) (getPosx())][(int) (getPosy())] = 3;
-                    }
-                    if (g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0 && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] == 1) {
-
-                        g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
-                    }
-                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
-
-                        g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
-                    }
-                    if (g1.getBoard()[(int) getPosx()-1][(int) getPosy()] !=0){
-                        g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
-
-                    }
-                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] != 0) {
-                        g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
-
-                    }
                 }
 
                 g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
@@ -300,8 +327,99 @@ public class Player {
 
             }
         } else if (c == "BLUE") {
-            if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
-                //putBomb();
+            if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) { //rajouter condition stack de bombe
+
+                pressCount = pressCount +1 ; // incrémentation du nombre de fois où le joueur à mis une bombe
+
+                int valPosx = (int) getPosx();
+                int valPosy = (int) getPosy();
+                value = g1.board[valPosx][valPosy]; //case à  la position du joueur au moment où il place la bombe (1 ou 2)
+                getValue((int) getPosx(), (int) getPosy(), g1.board);
+
+                int [][] g2 = g1.board; //tableau de transition
+
+                System.out.println(getPosx() +" // position y" +  getPosy() + "//") ;
+                System.out.println((int) getPosx() +"// position y" +  (int) getPosy()+ "/INT/") ;
+
+                if(value == 2){
+// rajouter le cas où pos == 1 et changer en orange
+                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0) {
+
+                        g2[(int) (getPosx())][(int) (getPosy())] = 3;
+                    }
+                    if (g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
+                        if(g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] == 1) {
+                            g2[(int) (getPosx() + 1)][(int) (getPosy())] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
+                        }
+                    }
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
+                        if(g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] == 1){
+                            g2[(int) (getPosx())][(int) (getPosy() + 1)] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
+                        }
+                    }
+                    if (g1.getBoard()[(int) getPosx()-1][(int) getPosy()] !=0){
+                        if(g1.getBoard()[(int) getPosx()-1][(int) getPosy()] == 1){
+                            g2[(int) (getPosx() - 1)][(int) (getPosy())] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
+                        }
+
+                    }
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] != 0) {
+                        if(g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] == 1){
+                            g2[(int) (getPosx())][(int) (getPosy() - 1)] = 4;
+                        }
+                        else{
+                            g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
+                        }
+
+                    }
+
+                }
+
+                g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
+                //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
+                //System.out.print(pressCount);
+                Timer timer = new Timer();
+
+                if(pressCount > 20){
+                    System.out.print("vous n'avez plus de bombes, veuillez attendre 3 secondes");
+
+                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
+
+                        public void run() {
+                            pressCount = pressCount - 1;
+                        }
+                    }, 5 * 1000); // millisecondes
+                }
+                else{
+                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
+
+                        public void run() {
+                            int i,j;
+
+                            if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] == 5 || g1.getBoard()[(int) getPosx()][(int) (getPosy())] == 4){
+                                setVie(vie-1);
+                            }
+                            for(i = 0; i <= g1.board.length - 1; i++) {
+                                for (j = 0; j <= g1.board[1].length - 1; j++) {
+                                    if (g1.board[i][j] == 3 || g1.board[i][j] == 4 || g1.board[i][j] == 5) {
+                                        g1.board[i][j]=2;
+                                    }
+                                }
+                                //System.out.print(board[i][j]);
+                            }
+                        }
+                    }, 5 * 1000); // millisecondes
+                }
+
             }
         }
     }

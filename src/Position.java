@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
  */
 public class Position {
 
-    Player p1 = new Player("p1", "RED", 0,0);
-    Player p2 = new Player("Adrien", "BLUE", 0, 0);
+    Player p1 = new Player("p1", "RED", 0,0,3);
+    Player p2 = new Player("Adrien", "BLUE", 0, 0,3);
 
     public float posx;
     public float posy;

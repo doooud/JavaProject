@@ -17,16 +17,20 @@ public class Player {
     public float posx;
     public float posy;
 
+    public int vie;
     private int pressCount = 0;
     private int imageValue = 1;
 
-    public Player(String n, String c, float x, float y) {
+
+
+
+    public Player(String n, String c, float x, float y, int life) {
 
         this.name = n;
         this.color = c;
         this.posx = x;
         this.posy = y;
-
+        this.vie = life;
 
         if (c == "RED") {
             this.posx = 1.5f;
@@ -37,6 +41,13 @@ public class Player {
         }
 
 
+    }
+    public int getVie() {
+        return vie;
+    }
+
+    public void setVie(int vie) {
+        this.vie = vie;
     }
 
     public float getPosx() {
@@ -202,19 +213,55 @@ public class Player {
                 System.out.println(getPosx() +" // position y" +  getPosy() + "//") ;
                 System.out.println((int) getPosx() +"// position y" +  (int) getPosy()+ "/INT/") ;
 
-                if( getValue((int) getPosx(), (int) getPosy(), g1.board) == 1){
+                if( getValue((int) getPosx(), (int) getPosy(), g1.board) == 1) { // sert à rien ne peut que se déplacer sur les cases 2
+
+                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0) {
+
                         g2[(int) (getPosx())][(int) (getPosy())] = 3;
-                    if(g1.getBoard()[(int) getPosx()+1][(int) (getPosy())] != 0){
-                        g2[(int) (getPosx()+1)][(int) (getPosy())] = 3;
                     }
+                    if (g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0) {
+
+                        g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
+                    }
+
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
+
+                        g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
+                    }
+                    if (g1.getBoard()[(int) getPosx()-1][(int) getPosy()] !=0){
+                        g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
+
+                    }
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] != 0) {
+                        g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
+
+                    }
+
                 }
                 else if(value == 2){
-                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0){
-                        g2[(int) (getPosx())][(int) (getPosy())] = 4;
-                        if(g1.getBoard()[(int) getPosx()+1][(int) (getPosy())] != 0){
-                            g2[(int) (getPosx()+1)][(int) (getPosy())] = 3;
-                        }
-                    }                }
+
+                    if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] != 0) {
+
+                        g2[(int) (getPosx())][(int) (getPosy())] = 3;
+                    }
+                    if (g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] != 0 && g1.getBoard()[(int) getPosx() + 1][(int) (getPosy())] == 1) {
+
+                        g2[(int) (getPosx() + 1)][(int) (getPosy())] = 5;
+                    }
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy() + 1)] != 0) {
+
+                        g2[(int) (getPosx())][(int) (getPosy() + 1)] = 5;
+                    }
+                    if (g1.getBoard()[(int) getPosx()-1][(int) getPosy()] !=0){
+                        g2[(int) (getPosx() - 1)][(int) (getPosy())] = 5;
+
+                    }
+                    if (g1.getBoard()[(int) getPosx()][(int) (getPosy()-1)] != 0) {
+                        g2[(int) (getPosx())][(int) (getPosy() - 1)] = 5;
+
+                    }
+                }
+
                 g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
                 //System.out.print( g1.getBoard()[(int) getPosx()][(int) (getPosy())]);
                 //System.out.print(pressCount);
@@ -235,13 +282,16 @@ public class Player {
 
                         public void run() {
                         int i,j;
+
+                        if(g1.getBoard()[(int) getPosx()][(int) (getPosy())] == 5 || g1.getBoard()[(int) getPosx()][(int) (getPosy())] == 4){
+                                setVie(vie-1);
+                        }
                         for(i = 0; i <= g1.board.length - 1; i++) {
                             for (j = 0; j <= g1.board[1].length - 1; j++) {
-                                if (g1.board[i][j] == 3 || g1.board[i][j] == 4) {
+                                if (g1.board[i][j] == 3 || g1.board[i][j] == 4 || g1.board[i][j] == 5) {
                                     g1.board[i][j]=2;
                                 }
                             }
-
                             //System.out.print(board[i][j]);
                         }
                         }

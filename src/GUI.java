@@ -6,7 +6,7 @@ import edu.princeton.cs.introcs.StdDraw;
 public class GUI {
 
 
-    int[][] board ;
+    private int[][] board ;
 
 
     public GUI() {

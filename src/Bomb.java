@@ -1,226 +1,248 @@
 import edu.princeton.cs.introcs.StdDraw;
+import org.omg.CORBA.TIMEOUT;
 
-import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 /**
  * Created by user on 18/05/2017.
  */
 
 
-public class Bomb{
+public class Bomb {
 
-
-    public String color;
     public float posx;
     public float posy;
     public int pressCount;
+    public int bombId;
+    public int range;
+    public int bombTime;
+    public Player player;
 
-    public Bomb(String c, int p) { // c pour la couleur permettant d'identifier la personne posant la bombe
+    Timer timer = new Timer();
 
-        this.color = c;
+    public Timer getTimer() {
+        return timer;
+    }
 
-        if (color == "RED") {
-            this.pressCount = p;
-        } else {
-            this.pressCount = p;
-        }
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public int getBombId() {
+        return bombId;
+    }
+
+    public void setBombId(int bombId) {
+        this.bombId = bombId;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public int getBombTime() {
+        return bombTime;
+    }
+
+    public void setBombTime(int bombTime) {
+        this.bombTime = bombTime;
+    }
+
+    public int getPressCount() {
+        return pressCount;
+    }
+
+    public void setPressCount(int pressCount) {
+        this.pressCount = pressCount;
+    }
+
+    public float getPosx() {
+        return posx;
+    }
+
+    public void setPosx(float posx) {
+        this.posx = posx;
+    }
+
+    public float getPosy() {
+        return posy;
+    }
+
+    public void setPosy(float posy) {
+        this.posy = posy;
+    }
+
+    public Bomb(float x, float y, int bombT, int rangeBomb) { // c pour la couleur permettant d'identifier la personne posant la bombe
+
+        this.posx = x;
+        this.posy = y;
+        this.bombTime = bombT;
+        this.range = rangeBomb;
 
     }
 
-    public void bombPlayer(String c, GUI g1, Player p1, GUI g2, Timer timer) {
-        // rajouter condition si orange alors blogué aussi
+    public void putBomb(int bTime, float x, float y, int range, GUI g1, ArrayList<Bomb> bombArray, int laps){
+        int i,j;
+        setBombTime(bTime);
+/*
+        for( i = 0; i <= g1.getTransBoard().length - 1; i++) {
+            for ( j = 0; j <= g1.getTransBoard()[1].length - 1; j++) {
+                System.out.print(g1.getTransBoard()[i][j]);
 
-        int bombVal = 3;
-        int value; // où est le joueur
-        int orange = 4; // valeur de transition pour les bombes
-        int green = 5;
-        int posi = 0;
-        int posj = 0;
-
-        int [][] g4 = g1.getBoard();
-        int [][] g3 = g2.getBoard();
-
-        if (c == "RED") {
-
-            if (StdDraw.isKeyPressed(KeyEvent.VK_F)) { //rajouter condition stack de bombe
-                this.pressCount = pressCount +1 ; // incrémentation du nombre de fois où le joueur à mis une bombe
-
-                int valPosx = (int) p1.getPosx();
-                int valPosy = (int) p1.getPosy();
-
-                value = g1.getBoard()[valPosx][valPosy]; //case à  la position du joueur au moment où il place la bombe (1 ou 2)
-                p1.getValue((int) p1.getPosx(), (int) p1.getPosy(), g1.getBoard());
+            }
+            System.out.println("");
+        }
+*/
+        this.setRange(range);
+        this.setPosx(x);
+        this.setPosy(y);
+        this.rangeBomb(g1, bombArray, laps);
+    }
 
 
-                if(value == 2 || value == 5){
-// rajouter le cas où pos == 1 et changer en orange
-                    if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())] != 0) {
 
-                        g3[(int) (p1.getPosx())][(int) (p1.getPosy())] = 3;
+    public void rangeBomb(GUI g1, ArrayList<Bomb> bombArray, int laps){
+        int i;
+        int [][] g3;
+
+        g3 = g1.getTransBoard(); //matrice d'avance
+        //incrémentation sur l'axe de x positif donc vers la droite
+        System.out.print("ArraySize range :"+bombArray.size());
+        for (i = 0; i <= this.getRange(); i++) {
+
+            if (g1.getTransBoard()[(int) getPosx() + i][(int) getPosy()] == 0) {
+                break;
+            }
+
+            else if (g1.getTransBoard()[(int) getPosx() + i][(int) getPosy()] == 2) {
+                g3[(int) getPosx() + i][(int) getPosy()] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx() + i, getPosy(), bombArray);
+
+            }
+
+            else if (g1.getTransBoard()[(int) getPosx() + i][(int) getPosy()] == 1) {
+                g3[(int) getPosx() + i][(int) getPosy()] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx() + i, getPosy(), bombArray);
+                break;
+            }
+
+        }
+
+        for (i = 0; i <= getRange(); i++) {
+            if (g1.getTransBoard()[(int) getPosx() - i][(int) getPosy()] == 0) {
+                break;
+            }
+            else if (g1.getTransBoard()[(int) getPosx() - i][(int) getPosy()] == 2) {
+                g3[(int) getPosx() - i][(int) getPosy()] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx() - i, getPosy(), bombArray);
+            }
+            else if (g1.getTransBoard()[(int) getPosx() - i][(int) getPosy()] == 1) {
+                g3[(int) getPosx() - i][(int) getPosy()] = 2;
+                g1.setTransBoard(g3);
+
+                exploBomb(g1,getPosx() - i, getPosy(), bombArray);
+                break;
+            }
+        }
+
+        for (i = 0; i <= getRange(); i++) {
+            if (g1.getTransBoard()[(int) getPosx()][(int) getPosy()+i] == 0) {
+                break;
+            }
+            else if (g1.getTransBoard()[(int) getPosx()][(int) getPosy() + i] == 2) {
+                g3[(int) getPosx()][(int) getPosy()+i] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx(), getPosy()+i, bombArray);
+
+
+            }
+            else if (g1.getTransBoard()[(int) getPosx()][(int) getPosy() + i] == 1) {
+                g3[(int) getPosx()][(int) getPosy()+i] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx(), getPosy()+i, bombArray);
+                break;
+            }
+        }
+
+        for (i = 0; i <= getRange(); i++) {
+            if (g1.getTransBoard()[(int) getPosx()][(int) getPosy()-i] == 0) {
+
+                break;
+            }
+            else if (g1.getTransBoard()[(int) getPosx()][(int) getPosy()-i] == 2) {
+                g3[(int) getPosx()][(int) getPosy()-i] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx(), getPosy()-i, bombArray);
+            }
+            else if (g1.getTransBoard()[(int) getPosx()][(int) getPosy()-i] == 1) {
+                g3[(int) getPosx()][(int) getPosy()-i] = 2;
+                g1.setTransBoard(g3);
+                exploBomb(g1,getPosx(), getPosy()-i, bombArray);
+                break;
+            }
+        }
+    }
+
+    public void exploBomb( GUI g1,  float x, float y, ArrayList<Bomb> bombArray){
+
+        int [][] g2;
+        g2 = g1.getBoard();
+        g2[(int) getPosx()][(int) getPosy()] = 3;
+        g1.setBoard(g2);
+
+
+        getTimer().schedule(new TimerTask() {
+            public void run() {
+                afterTimer(g2, x, y, g1, bombArray);
+            }
+        }, getBombTime() * 1000);  // millisecondes
+
+
+    }
+
+
+    public void explodeChain(GUI g1, ArrayList<Bomb> bombArray){
+        int j,i;
+        for (i = 0; i <= this.getRange(); i++) {
+            if (g1.getTransBoard()[(int) getPosx() + i][(int) getPosy()] == 0) {
+                break;
+
+            } else if (g1.getBoard()[(int) getPosx() + i][(int) getPosy()] == 3) {
+                for (j = 0; j <= bombArray.size() - 1; j++) {
+                    if(bombArray.get(j).getPosx() == getPosx() + i  && bombArray.get(j).getPosy() == getPosy()) {
+                        /*bombArray.get(j).getTimer().cancel();
+                        bombArray.add(j, new Bomb(getPosy()+i, getPosy(), 0, getRange()));
+                        bombArray.get(j).putBomb(0,getPosx()+i, getPosy(), getRange(), g1, bombArray);
+                           */
+                        bombArray.get(j).getTimer().cancel();
+
+
                     }
-                    if (g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] != 0 && g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] != 3) {
-                        if(g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] == 1 || g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] == 4) {
-                            g3[(int) (p1.getPosx() + 1)][(int) (p1.getPosy())] = orange;
-
-                        }
-                        else{
-                            g3[(int) (p1.getPosx() + 1)][(int) (p1.getPosy())] = green;
-                        }
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] != 0 && g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] != 3) {
-                        if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] == 1 || g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] == 4){
-                            g3[(int) (p1.getPosx())][(int) (p1.getPosy() + 1)] = orange;
-                        }
-                        else{
-                            g3[(int) (p1.getPosx())][(int) (p1.getPosy() + 1)] = green;
-                        }
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()-1][(int) p1.getPosy()] !=0 && g1.getBoard()[(int) p1.getPosx()-1][(int) p1.getPosy()] != 3){
-                        if(g1.getBoard()[(int) p1.getPosx()-1][(int) p1.getPosy()] == 1 || g1.getBoard()[(int) p1.getPosx() - 1][(int) (p1.getPosy())] == 4){
-                            g3[(int) (p1.getPosx() - 1)][(int) (p1.getPosy())] = orange;
-                        }
-                        else{
-                            g3[(int) (p1.getPosx() - 1)][(int) (p1.getPosy())] = green;
-                        }
-
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] != 0 && g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] != 3) {
-                        if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] == 1 || g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] == 4){
-                            g3[(int) (p1.getPosx())][(int) (p1.getPosy() - 1)] = orange;
-                        }
-                        else{
-                            g3[(int) (p1.getPosx())][(int) (p1.getPosy() - 1)] = green;
-                        }
-                    }
-                }
-                // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
-                //System.out.print( g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())]);
-                //System.out.print(pressCount);
-
-                if(pressCount > 20){
-                    System.out.print("vous n'avez plus de bombes, veuillez attendre 3 secondes");
-
-                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
-
-                        public void run() {
-                            pressCount = pressCount - 1;
-                        }
-                    }, 5 * 1000); // millisecondes
-                }
-                else{
-                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
-
-                        public void run() {
-                            int i,j;
-                            System.out.print("I'd like you to get the fuck out of here");
-                            if(g2.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())] == 5 || g2.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())] == 4){
-                                p1.setVie(p1.getVie()-1);
-                            }
-                            for(i = 0; i <= g2.getBoard().length - 1; i++) {
-                                for (j = 0; j <= g2.getBoard()[1].length - 1; j++) {
-                                    if (g2.getBoard()[i][j] == 3 || g2.getBoard()[i][j] == 4 || g2.getBoard()[i][j] == 5) {
-                                        g2.getBoard()[i][j]=2;
-                                    }
-                                }
-                                //System.out.print(board[i][j]);
-                            }
-                            g1.setBoard(g3);
-                        }
-                    }, 5 * 1000); // millisecondes
                 }
 
             }
-        } else if (c == "BLUE") {/*
-            Timer timer = new Timer();
-
-            if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) { //rajouter condition stack de bombe
-
-                pressCount = pressCount +1 ; // incrémentation du nombre de fois où le joueur à mis une bombe
-
-                int valPosx = (int) p1.getPosx();
-                int valPosy = (int) p1.getPosy();
-                value = g1.board[valPosx][valPosy]; //case à  la position du joueur au moment où il place la bombe (1 ou 2)
-                p1.getValue((int) p1.getPosx(), (int) p1.getPosy(), g1.board);
-
-                int [][] g2 = g1.board; //tableau de transition
-
-                System.out.println(p1.getPosx() +" // position y" +  p1.getPosy() + "//") ;
-                System.out.println((int) p1.getPosx() +"// position y" +  (int) p1.getPosy()+ "/INT/") ;
-
-                if(value == 2){
-// rajouter le cas où pos == 1 et changer en orange
-                    if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())] != 0) {
-
-                        g2[(int) (p1.getPosx())][(int) (p1.getPosy())] = 3;
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] != 0) {
-                        if(g1.getBoard()[(int) p1.getPosx() + 1][(int) (p1.getPosy())] == 1) {
-                            g2[(int) (p1.getPosx() + 1)][(int) (p1.getPosy())] = 4;
-                        }
-                        else{
-                            g2[(int) (p1.getPosx() + 1)][(int) (p1.getPosy())] = 5;
-                        }
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] != 0) {
-                        if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy() + 1)] == 1){
-                            g2[(int) (p1.getPosx())][(int) (p1.getPosy() + 1)] = 4;
-                        }
-                        else{
-                            g2[(int) (p1.getPosx())][(int) (p1.getPosy() + 1)] = 5;
-                        }
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()-1][(int) p1.getPosy()] !=0){
-                        if(g1.getBoard()[(int) p1.getPosx()-1][(int) p1.getPosy()] == 1){
-                            g2[(int) (p1.getPosx() - 1)][(int) (p1.getPosy())] = 4;
-                        }
-                        else{
-                            g2[(int) (p1.getPosx() - 1)][(int) (p1.getPosy())] = 5;
-                        }
-
-                    }
-                    if (g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] != 0) {
-                        if(g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy()-1)] == 1){
-                            g2[(int) (p1.getPosx())][(int) (p1.getPosy() - 1)] = 4;
-                        }
-                        else{
-                            g2[(int) (p1.getPosx())][(int) (p1.getPosy() - 1)] = 5;
-                        }
-
-                    }
-
-                }
-
-                g1.setBoard(g2); // si le joueur appuie sur F changer le 1 par 3 quand le joueur pose une bombe
-                //System.out.print( g1.getBoard()[(int) p1.getPosx()][(int) (p1.getPosy())]);
-                //System.out.print(pressCount);
-
-                if(pressCount > 20){
-                    System.out.print("vous n'avez plus de bombes, veuillez attendre 3 secondes");
-
-                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
-
-                        public void run() {
-                            pressCount = pressCount - 1;
-                        }
-                    }, 5 * 1000); // millisecondes
-                }
-                else{
-                    timer.schedule(new TimerTask() { // execution de void run après le temps donc après 3 secondes
-
-                        public void run() {
-                            int i,j;
-
-
-                        }
-                    }, 5 * 1000); // millisecondes
-                }
-
-            }*/
         }
     }
 
+    public void afterTimer(int [][] g2, float x, float y, GUI g1, ArrayList<Bomb> bombArray){
+        g2[(int) x][(int) y] = 2;
+        g1.setBoard(g2);
+        explodeChain(g1, bombArray);
+
+    }
+
+
+
+
 }
+
 
 

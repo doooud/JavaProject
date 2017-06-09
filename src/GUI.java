@@ -1,4 +1,7 @@
+import edu.princeton.cs.introcs.StdAudio;
 import edu.princeton.cs.introcs.StdDraw;
+
+
 
 /**
  * Created by user on 18/05/2017.
@@ -18,6 +21,8 @@ public class GUI {
     }
 
     private int[][] transBoardCheck;
+
+    private boolean val = false;
 
 
     public GUI() {
@@ -108,38 +113,65 @@ public class GUI {
         for( i = 0; i <= getBoard().length - 1; i++) {
             for ( j = 0; j <= this.board[1].length - 1; j++) {
                 if (getBoard()[i][j] == 0) {
-                    StdDraw.setPenColor(StdDraw.GRAY);
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/indestructible.png",1,1);
+
                     //StdDraw.filledSquare(i + 0.5, j + 0.5, 0.5);
                 } else if (getBoard()[i][j] == 1) {
-                    StdDraw.setPenColor(StdDraw.ORANGE);
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/destructible.png",1,1);
+
                     //StdDraw.picture(i+0.5, j+0.5, "image/gui/destructible.png", 1,1);
                 } else if (getBoard()[i][j] == 2) {
-                    StdDraw.setPenColor(StdDraw.GREEN);
-
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/sol.png",1,1);
                 }
                 //System.out.print(board[i][j]);
-                StdDraw.filledSquare(i + 0.5, j + 0.5, 0.5);
             }
         }
     }
 
-    public void guiCheckBomb(){
+    public void sound() {
+        StdAudio.play("sound/first.wav");
+    }
+
+
+    public void guiCheckItem(){
         int i,j;
 
         for( i = 0; i <= getBoard().length - 1; i++) {
             for ( j = 0; j <= getBoard()[1].length - 1; j++) {
                 if (getBoard()[i][j] == 3) {
 
-                    StdDraw.setPenColor(StdDraw.GREEN);
-                    StdDraw.filledSquare(i+0.5, j+0.5, 0.5);
-                    StdDraw.setPenColor(StdDraw.BLACK);
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/sol.png",1,1);
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/bomb.png",0.5,0.5);
+                }
+                else if(getBoard()[i][j] == 5){
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/sol.png",1,1);
+                    StdDraw.setPenColor(StdDraw.BLUE);
+                    StdDraw.filledCircle(i+0.5, j+0.5,  0.20);
+                }
+                else if(getBoard()[i][j] == 6){
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/sol.png",1,1);
+                    StdDraw.setPenColor(StdDraw.RED);
+                    StdDraw.filledCircle(i+0.5, j+0.5,  0.20);
+                }
+                else if(getBoard()[i][j] == 7){
+                    StdDraw.picture(i+0.5, j+0.5, "image/gui/sol.png",1,1);
+                    StdDraw.setPenColor(StdDraw.CYAN);
                     StdDraw.filledCircle(i+0.5, j+0.5,  0.20);
                 }
             }
         }
     }
 
+    public void menu() {
 
+        if (!isVal()) {
+            StdDraw.picture(10.5, 8.5, "image/gui/start.png", 21, 17);
+            if (StdDraw.mousePressed()) {
+                setVal(true);
+            }
+
+        }
+    }
 
     public int[][] getBoard() {
         return board;
@@ -152,8 +184,17 @@ public class GUI {
     public int[][] getTransBoard() {
         return transBoard;
     }
+
     public void setTransBoard(int[][] transBoard) {
         this.transBoard = transBoard;
+    }
+
+    public boolean isVal() {
+        return val;
+    }
+
+    public void setVal(boolean val) {
+        this.val = val;
     }
 
 }
